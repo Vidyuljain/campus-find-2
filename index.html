@@ -1,0 +1,1082 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Find | Lost & Found Portal</title>
+
+<style>
+/* ===== GENERAL STYLING ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --green: #176b4d;
+    --dark-green: #104c37;
+    --light-green: #e7f3ec;
+    --cream: #faf8f1;
+    --yellow: #f4c95d;
+    --text: #23352d;
+    --muted: #6d7c73;
+    --white: #ffffff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button, input, select, textarea {
+    font: inherit;
+}
+
+/* ===== NAVIGATION ===== */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 8%;
+    background: var(--white);
+    border-bottom: 1px solid #e6e9e3;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    color: var(--green);
+}
+
+.logo span {
+    color: var(--yellow);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: var(--green);
+}
+
+.nav-button {
+    background: var(--green);
+    color: white;
+    padding: 11px 18px;
+    border-radius: 8px;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+    padding: 75px 8% 65px;
+    background: var(--light-green);
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 45px;
+    align-items: center;
+}
+
+.eyebrow {
+    display: inline-block;
+    background: #d3e9dc;
+    color: var(--dark-green);
+    padding: 7px 13px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: 22px;
+}
+
+.hero h1 span {
+    color: var(--green);
+}
+
+.hero p {
+    color: var(--muted);
+    max-width: 540px;
+    font-size: 16px;
+    margin-bottom: 28px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 13px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 13px 22px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    border: 2px solid var(--green);
+    transition: 0.2s;
+}
+
+.btn-primary {
+    background: var(--green);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--dark-green);
+}
+
+.btn-outline {
+    color: var(--green);
+    background: transparent;
+}
+
+.btn-outline:hover {
+    background: white;
+}
+
+/* ===== HERO ILLUSTRATION ===== */
+.hero-art {
+    background: var(--green);
+    color: white;
+    min-height: 300px;
+    border-radius: 28px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-art::before,
+.hero-art::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 50%;
+}
+
+.hero-art::before {
+    width: 260px;
+    height: 260px;
+}
+
+.hero-art::after {
+    width: 190px;
+    height: 190px;
+}
+
+.art-icon {
+    font-size: 80px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 10px;
+}
+
+.hero-art h3,
+.hero-art p {
+    position: relative;
+    z-index: 1;
+    color: white;
+}
+
+.hero-art h3 {
+    font-size: 22px;
+}
+
+.hero-art p {
+    font-size: 13px;
+    margin: 5px 0 0;
+}
+
+/* ===== STATISTICS ===== */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    padding: 30px 8%;
+    background: white;
+}
+
+.stat {
+    text-align: center;
+    padding: 15px;
+}
+
+.stat h2 {
+    color: var(--green);
+    font-size: 30px;
+}
+
+.stat p {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* ===== MAIN CONTENT ===== */
+.section {
+    padding: 65px 8%;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.section-heading h2 {
+    font-size: 32px;
+    line-height: 1.2;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.small-label {
+    font-size: 12px;
+    color: var(--green);
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+/* ===== CSS-ONLY FILTERS ===== */
+.filter-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.filter-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.filter-bar label {
+    display: inline-block;
+    padding: 9px 18px;
+    border: 1px solid #dce3dc;
+    border-radius: 30px;
+    cursor: pointer;
+    background: white;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.filter-bar label:hover {
+    border-color: var(--green);
+}
+
+#filter-all:checked ~ .filter-bar label[for="filter-all"],
+#filter-lost:checked ~ .filter-bar label[for="filter-lost"],
+#filter-found:checked ~ .filter-bar label[for="filter-found"],
+#filter-electronics:checked ~ .filter-bar label[for="filter-electronics"],
+#filter-accessories:checked ~ .filter-bar label[for="filter-accessories"] {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+}
+
+/* ===== ITEM CARDS ===== */
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.item-card {
+    background: white;
+    border: 1px solid #e9ece6;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(23, 60, 40, 0.09);
+}
+
+.item-image {
+    height: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 67px;
+    position: relative;
+}
+
+.bg-blue { background: #e7eefb; }
+.bg-yellow { background: #fff3d6; }
+.bg-purple { background: #eee8fa; }
+.bg-pink { background: #fae8e7; }
+.bg-green { background: #e4f2e8; }
+.bg-grey { background: #edf0f0; }
+
+.status {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: white;
+    color: var(--green);
+    padding: 5px 10px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.item-content {
+    padding: 20px;
+}
+
+.item-category {
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.item-content h3 {
+    font-size: 19px;
+    margin: 5px 0 8px;
+}
+
+.item-description {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+
+.item-meta {
+    border-top: 1px solid #edf0eb;
+    padding-top: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.item-meta strong {
+    color: var(--text);
+}
+
+.item-action {
+    display: block;
+    text-align: center;
+    margin-top: 17px;
+    border: 1px solid var(--green);
+    border-radius: 7px;
+    padding: 9px;
+    color: var(--green);
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.item-action:hover {
+    background: var(--green);
+    color: white;
+}
+
+/* Filter cards without JavaScript */
+#filter-lost:checked ~ .items-grid .item-card:not(.lost),
+#filter-found:checked ~ .items-grid .item-card:not(.found),
+#filter-electronics:checked ~ .items-grid .item-card:not(.electronics),
+#filter-accessories:checked ~ .items-grid .item-card:not(.accessories) {
+    display: none;
+}
+
+/* ===== REPORT FORM ===== */
+.report-section {
+    background: #eef4ed;
+    padding: 65px 8%;
+}
+
+.report-layout {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 45px;
+    align-items: start;
+}
+
+.report-info h2 {
+    font-size: 34px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.report-info p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.tip {
+    background: white;
+    padding: 17px;
+    border-radius: 10px;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+.tip strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.report-form {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #e1e8df;
+}
+
+.report-form h3 {
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.form-note {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 22px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    border: 1px solid #dce3dc;
+    border-radius: 8px;
+    padding: 12px;
+    background: #fdfdfb;
+    outline: none;
+    color: var(--text);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--green);
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.submit-button {
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    background: var(--green);
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background: var(--dark-green);
+}
+
+/* ===== HOW IT WORKS ===== */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 35px;
+}
+
+.step {
+    background: white;
+    border: 1px solid #e7ebe5;
+    border-radius: 14px;
+    padding: 25px;
+}
+
+.step-number {
+    display: flex;
+    width: 43px;
+    height: 43px;
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+    background: var(--light-green);
+    color: var(--green);
+    font-weight: 800;
+    margin-bottom: 17px;
+}
+
+.step h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.step p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background: #143d2e;
+    color: white;
+    padding: 35px 8%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+footer .logo {
+    color: white;
+}
+
+footer p {
+    font-size: 12px;
+    color: #c4d5cb;
+    margin-top: 5px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-art {
+        min-height: 240px;
+    }
+
+    .items-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .report-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 16px 5%;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
+    .nav-button {
+        padding: 8px 10px;
+    }
+
+    .hero,
+    .section,
+    .report-section {
+        padding: 45px 5%;
+    }
+
+    .hero h1 {
+        letter-spacing: -1px;
+    }
+
+    .stats {
+        padding: 20px 4%;
+        gap: 5px;
+    }
+
+    .stat h2 {
+        font-size: 24px;
+    }
+
+    .stat p {
+        font-size: 11px;
+    }
+
+    .section-heading {
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .section-heading h2,
+    .report-info h2 {
+        font-size: 28px;
+    }
+
+    .items-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .steps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .report-form {
+        padding: 20px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<header class="navbar">
+    <a href="#" class="logo">Campus<span>Find.</span></a>
+
+    <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#items">Browse Items</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#report" class="nav-button">Report an Item +</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div>
+        <span class="eyebrow">Your campus community portal</span>
+
+        <h1>Lost something?<br>
+        <span>Let's find it.</span></h1>
+
+        <p>
+            Lost your keys, wallet, or favourite headphones on campus?
+            Campus Find connects students and staff to reunite lost
+            belongings with their rightful owners.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#items" class="btn btn-primary">Browse Lost Items →</a>
+            <a href="#report" class="btn btn-outline">Report an Item</a>
+        </div>
+    </div>
+
+    <div class="hero-art">
+        <div class="art-icon">🎒</div>
+        <h3>Lost today. Found tomorrow.</h3>
+        <p>A little help from your campus community.</p>
+    </div>
+</section>
+
+<!-- STATISTICS -->
+<section class="stats">
+    <div class="stat">
+        <h2>120+</h2>
+        <p>Items Reported</p>
+    </div>
+
+    <div class="stat">
+        <h2>85+</h2>
+        <p>Items Reunited</p>
+    </div>
+
+    <div class="stat">
+        <h2>1</h2>
+        <p>Campus Community</p>
+    </div>
+</section>
+
+<!-- LOST AND FOUND ITEMS -->
+<section class="section" id="items">
+    <div class="section-heading">
+        <div>
+            <div class="small-label">Lost something? Start here.</div>
+            <h2>Recently Reported Items</h2>
+            <p>Browse the items reported by your campus community.</p>
+        </div>
+    </div>
+
+    <!-- CSS-only category filters -->
+    <input class="filter-input" type="radio" name="filter"
+           id="filter-all" checked>
+    <input class="filter-input" type="radio" name="filter"
+           id="filter-lost">
+    <input class="filter-input" type="radio" name="filter"
+           id="filter-found">
+    <input class="filter-input" type="radio" name="filter"
+           id="filter-electronics">
+    <input class="filter-input" type="radio" name="filter"
+           id="filter-accessories">
+
+    <div class="filter-bar">
+        <label for="filter-all">All Items</label>
+        <label for="filter-lost">Lost</label>
+        <label for="filter-found">Found</label>
+        <label for="filter-electronics">Electronics</label>
+        <label for="filter-accessories">Accessories</label>
+    </div>
+
+    <div class="items-grid">
+
+        <!-- ITEM 1 -->
+        <article class="item-card lost electronics">
+            <div class="item-image bg-blue">
+                <span class="status">Lost Item</span>
+                💻
+            </div>
+            <div class="item-content">
+                <span class="item-category">Electronics</span>
+                <h3>Silver Laptop</h3>
+                <p class="item-description">
+                    A silver laptop possibly left behind after a lecture.
+                </p>
+                <div class="item-meta">
+                    <span>📍 <strong>Library</strong></span>
+                    <span>📅 Reported: 24 October</span>
+                </div>
+                <a href="#report" class="item-action">I Have Information</a>
+            </div>
+        </article>
+
+        <!-- ITEM 2 -->
+        <article class="item-card found accessories">
+            <div class="item-image bg-yellow">
+                <span class="status">Found Item</span>
+                🔑
+            </div>
+            <div class="item-content">
+                <span class="item-category">Accessories</span>
+                <h3>Set of Keys</h3>
+                <p class="item-description">
+                    A small set of keys found near the campus cafeteria.
+                </p>
+                <div class="item-meta">
+                    <span>📍 <strong>Cafeteria</strong></span>
+                    <span>📅 Reported: 23 October</span>
+                </div>
+                <a href="#report" class="item-action">I Have Information</a>
+            </div>
+        </article>
+
+        <!-- ITEM 3 -->
+        <article class="item-card lost accessories">
+            <div class="item-image bg-purple">
+                <span class="status">Lost Item</span>
+                🎧
+            </div>
+            <div class="item-content">
+                <span class="item-category">Accessories</span>
+                <h3>Wireless Headphones</h3>
+                <p class="item-description">
+                    Black wireless headphones with a compact carrying case.
+                </p>
+                <div class="item-meta">
+                    <span>📍 <strong>Computer Lab</strong></span>
+                    <span>📅 Reported: 22 October</span>
+                </div>
+                <a href="#report" class="item-action">I Have Information</a>
+            </div>
+        </article>
+
+        <!-- ITEM 4 -->
+        <article class="item-card found accessories">
+            <div class="item-image bg-pink">
+                <span class="status">Found Item</span>
+                👛
+            </div>
+            <div class="item-content">
+                <span class="item-category">Accessories</span>
+                <h3>Brown Wallet</h3>
+                <p class="item-description">
+                    A brown wallet found near the main college entrance.
+                </p>
+                <div class="item-meta">
+                    <span>📍 <strong>Main Entrance</strong></span>
+                    <span>📅 Reported: 21 October</span>
+                </div>
+                <a href="#report" class="item-action">I Have Information</a>
+            </div>
+        </article>
+
+        <!-- ITEM 5 -->
+        <article class="item-card lost electronics">
+            <div class="item-image bg-green">
+                <span class="status">Lost Item</span>
+                📱
+            </div>
+            <div class="item-content">
+                <span class="item-category">Electronics</span>
+                <h3>Mobile Phone</h3>
+                <p class="item-description">
+                    A dark-coloured smartphone possibly lost after class.
+                </p>
+                <div class="item-meta">
+                    <span>📍 <strong>Lecture Hall B</strong></span>
+                    <span>📅 Reported: 20 October</span>
+                </div>
+                <a href="#report" class="item-action">I Have Information</a>
+            </div>
+        </article>
+
+        <!-- ITEM 6 -->
+        <article class="item-card found accessories">
+            <div class="item-image bg-grey">
+                <span class="status">Found Item</span>
+                📒
+            </div>
+            <div class="item-content">
+                <span class="item-category">Stationery</span>
+                <h3>Notebook</h3>
+                <p class="item-description">
+                    A notebook found on a desk in the study area.
+                </p>
+                <div class="item-meta">
+                    <span>📍 <strong>Study Area</strong></span>
+                    <span>📅 Reported: 19 October</span>
+                </div>
+                <a href="#report" class="item-action">I Have Information</a>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<!-- REPORT AN ITEM -->
+<section class="report-section" id="report">
+    <div class="report-layout">
+
+        <div class="report-info">
+            <div class="small-label">Help someone today</div>
+            <h2>Lost it or found it? Let us know.</h2>
+
+            <p>
+                Every report helps our campus community recover
+                important belongings. Provide the item's details
+                and the location where it was lost or found.
+            </p>
+
+            <div class="tip">
+                <strong>🔎 Be specific</strong>
+                Include the item's colour, brand, and any identifying
+                features that can help distinguish it.
+            </div>
+
+            <div class="tip">
+                <strong>🔐 Protect personal information</strong>
+                Do not publish passwords, bank details, or sensitive
+                identification numbers in a public report.
+            </div>
+        </div>
+
+        <form class="report-form" action="#report" method="get">
+            <h3>Report an Item</h3>
+            <p class="form-note">
+                Fill in the details below to prepare your report.
+            </p>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="report-type">Report Type *</label>
+                    <select id="report-type" required>
+                        <option value="">Select type</option>
+                        <option>Lost Item</option>
+                        <option>Found Item</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category *</label>
+                    <select id="category" required>
+                        <option value="">Select category</option>
+                        <option>Electronics</option>
+                        <option>Accessories</option>
+                        <option>Books and Stationery</option>
+                        <option>Clothing</option>
+                        <option>Keys and Cards</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="item-name">Item Name *</label>
+                <input type="text" id="item-name"
+                       placeholder="e.g. Black wireless headphones" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="location">Location *</label>
+                    <input type="text" id="location"
+                           placeholder="e.g. Library, Floor 2" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date *</label>
+                    <input type="date" id="date" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Item Description *</label>
+                <textarea id="description"
+                          placeholder="Describe the item and any identifying details..."
+                          required></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="student-name">Your Name *</label>
+                    <input type="text" id="student-name"
+                           placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email"
+                           placeholder="you@example.com" required>
+                </div>
+            </div>
+
+            <button class="submit-button" type="submit">
+                Submit Report →
+            </button>
+
+            <p class="form-note" style="margin-top:12px; margin-bottom:0;">
+                Demo website: this form does not store or send reports.
+            </p>
+        </form>
+
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how-it-works">
+    <div class="section-heading">
+        <div>
+            <div class="small-label">Simple and community-driven</div>
+            <h2>How Campus Find Works</h2>
+            <p>Three simple steps to help reunite people with their belongings.</p>
+        </div>
+    </div>
+
+    <div class="steps-grid">
+        <div class="step">
+            <div class="step-number">01</div>
+            <h3>Report an Item</h3>
+            <p>
+                Provide the details of an item you have lost or found,
+                including its location and description.
+            </p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">02</div>
+            <h3>Browse Listings</h3>
+            <p>
+                Look through the reported items and check whether
+                someone has already found what you lost.
+            </p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">03</div>
+            <h3>Reconnect</h3>
+            <p>
+                Coordinate a safe return through your campus's
+                authorised lost-and-found office.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-content">
+        <div>
+            <a href="#home" class="logo">Campus<span>Find.</span></a>
+            <p>Making campus life a little less stressful.</p>
+        </div>
+
+        <p>© 2026 Campus Find. A Campus Lost & Found Portal.</p>
+    </div>
+</footer>
+
+</body>
+</html>
+```
